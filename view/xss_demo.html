@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+    <div>
+        <h1>get</h1>
+        <div>
+            <input type="text" id="getVal"/>
+            <button onclick="submitGET()">submitGET</button>
+        </div>
+    </div>
+    <div>
+        <h1>post</h1>
+        <input type="text" id="postVal"/>
+        <button onclick="submitPOST()">submitPOST</button>
+    </div>
+    <div id="content" style="border-top: 2px solid red; margin-top: 50px;"></div>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        console.log(window.location.host)
+
+        function submitGET () {
+            let getVal = $('#getVal').val()
+            $.get('/update', { getVal }, function (res) {
+                $('#content').html('get' + res.getVal)
+            })
+        }
+        
+        function submitPOST () {
+            // let postVal = htmlEscape($('#postVal').val())
+            let postVal = $('#postVal').val()
+            $.post('/', { postVal }, function (res) {
+                $('#content').html('post: ' + res.postVal)
+            })
+        }
+
+        function htmlEscape (text) {
+            return text.replace (/[<>"&]/g, function (match, pos, originalText) {
+                switch(match) {
+                    case '<': return '&lt;'
+                    case '>':return '&gt;'
+                    case '&':return '&amp;'
+                    case '\"':return '&quot;'
+                }
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>home</title>
+</head>
+<body>
+    <h1>request post demo</h1>
+    <div>
+        <p>userName: <input type="text" id="userName"/></p>
+        <p>nickName: <input type="text" id="nickName"/></p>
+        <p>email: <input type="text" id="email"/></p>
+        <button onclick="submit()">提交</button>
+    </div>
+    <div id="content" style="border-top: 2px solid red; margin-top: 50px;">
+
+    </div>
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        var param = {};
+
+        function submit () {
+            param.userName = $('#userName').val()
+            param.nickName = $('#nickName').val()
+            param.email = $('#email').val()
+
+            $.post('http://172.17.3.42:3000/', param, function (res) {
+                $('#content').html(JSON.stringify(res))
+            })
+        }
+    </script>
+</body>
+</html>
